@@ -1,22 +1,19 @@
-import type { StaticImageData } from 'next/image'
-
-import { cn } from 'src/utilities/cn'
-import React from 'react'
-import RichText from '@/components/RichText'
-
-import type { MediaBlock as MediaBlockProps } from '@/payload-types'
-
-import { Media } from '../../components/Media'
+import React from "react";
+import type { StaticImageData } from "next/image";
+import RichText from "@/components/RichText";
+import { cn } from "src/utilities/cn";
+import type { MediaBlock as MediaBlockProps } from "@/payload-types";
+import { Media } from "../../components/Media";
 
 type Props = MediaBlockProps & {
-  breakout?: boolean
-  captionClassName?: string
-  className?: string
-  enableGutter?: boolean
-  imgClassName?: string
-  staticImage?: StaticImageData
-  disableInnerContainer?: boolean
-}
+  breakout?: boolean;
+  captionClassName?: string;
+  className?: string;
+  enableGutter?: boolean;
+  imgClassName?: string;
+  staticImage?: StaticImageData;
+  disableInnerContainer?: boolean;
+};
 
 export const MediaBlock: React.FC<Props> = (props) => {
   const {
@@ -25,38 +22,42 @@ export const MediaBlock: React.FC<Props> = (props) => {
     enableGutter = true,
     imgClassName,
     media,
-    position = 'default',
+    position = "default",
     staticImage,
     disableInnerContainer,
-  } = props
+  } = props;
 
-  let caption
-  if (media && typeof media === 'object') caption = media.caption
+  let caption;
+  if (media && typeof media === "object") caption = media.caption;
 
   return (
     <div
       className={cn(
-        '',
+        "",
         {
-          container: position === 'default' && enableGutter,
+          container: position === "default" && enableGutter,
         },
         className,
       )}
     >
-      {position === 'fullscreen' && (
+      {position === "fullscreen" && (
         <div className="relative">
           <Media resource={media} src={staticImage} />
         </div>
       )}
-      {position === 'default' && (
-        <Media imgClassName={cn('rounded', imgClassName)} resource={media} src={staticImage} />
+      {position === "default" && (
+        <Media
+          imgClassName={cn("rounded", imgClassName)}
+          resource={media}
+          src={staticImage}
+        />
       )}
       {caption && (
         <div
           className={cn(
-            'mt-6',
+            "mt-6",
             {
-              container: position === 'fullscreen' && !disableInnerContainer,
+              container: position === "fullscreen" && !disableInnerContainer,
             },
             captionClassName,
           )}
@@ -65,5 +66,5 @@ export const MediaBlock: React.FC<Props> = (props) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
