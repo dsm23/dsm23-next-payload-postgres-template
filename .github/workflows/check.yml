@@ -17,6 +17,21 @@ jobs:
     runs-on: ubuntu-latest
     # container:
     #   image: mcr.microsoft.com/playwright:v1.48.0-jammy
+    services:
+      postgres:
+        image: postgres:17
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: dsm23-next-payload-postgres-template
+          POSTGRES_PASSWORD: password
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@v2
@@ -51,12 +66,12 @@ jobs:
         run: pnpm lint
       # - name: Unit & Integration tests
       #   run: pnpm test -- --coverage
-      # - name: Build
-      #   run: pnpm build
-      #   env:
-      # DATABASE_URI: ${{ secrets.DATABASE_URI }}
-      # PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      # NEXT_PUBLIC_SERVER_URL: ${{ vars.NEXT_PUBLIC_SERVER_URL }}
+      - name: Build
+        run: pnpm build
+        env:
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          NEXT_PUBLIC_SERVER_URL: ${{ vars.NEXT_PUBLIC_SERVER_URL }}
       # - name: Smoke & Acceptance tests
       #   run: |
       #     pnpm build-storybook --quiet
