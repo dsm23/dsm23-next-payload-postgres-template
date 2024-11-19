@@ -18,6 +18,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "latest",
     "@payloadcms/live-preview-react": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
@@ -48,8 +49,7 @@
     "react-hook-form": "7.45.4",
     "sharp": "0.32.6",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "@payloadcms/db-postgres": "latest"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.6",
@@ -61,7 +61,9 @@
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "autoprefixer": "^10.4.19",
+    "commitizen": "^4.3.1",
     "copyfiles": "^2.4.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.0",
     "postcss": "^8.4.38",
